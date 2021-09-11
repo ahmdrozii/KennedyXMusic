@@ -563,25 +563,25 @@ async def play(_, message: Message):
           await lel.edit("Give me something to play")
         # Looks like hell. Aren't it?? FUCK OFF
         try:
-            toxxt = "**Pilih lagu yang diinginkan:**\n\n"
+            toxxt = "💠 __Pilih lagu yang diinginkan:__ \n\n"
             j = 0
             useer=user_name
             emojilist = ["·①·","·②·","·③·","·④·","·⑤·"]
             while j < 5:
-                toxxt += f"{emojilist[j]} [{results[j]['title'][:23]}](https://youtube.com{results[j]['url_suffix']})...\n"
-                toxxt += f" ├ {results[j]['views']}\n"
-                toxxt += f" └ Duration - {results[j]['duration']}\n\n"
+                toxxt += f"{emojilist[j]} [{results[j]['title'][:30]}](https://youtube.com{results[j]['url_suffix']})...\n"
+                toxxt += f" ├ **Duration** - {results[j]['duration']}\n"
+                toxxt += f" └ __Powered by {BOT_NAME} A.I__\n\n
                 j += 1            
             keyboard = InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("·①·", callback_data=f'plll 0|{query}|{user_id}'),
-                        InlineKeyboardButton("·②·", callback_data=f'plll 1|{query}|{user_id}'),
-                        InlineKeyboardButton("·③·", callback_data=f'plll 2|{query}|{user_id}'),
+                        InlineKeyboardButton("①", callback_data=f'plll 0|{query}|{user_id}'),
+                        InlineKeyboardButton("②", callback_data=f'plll 1|{query}|{user_id}'),
+                        InlineKeyboardButton("③", callback_data=f'plll 2|{query}|{user_id}'),
                     ],
                     [
-                        InlineKeyboardButton("·④·", callback_data=f'plll 3|{query}|{user_id}'),
-                        InlineKeyboardButton("·⑤·", callback_data=f'plll 4|{query}|{user_id}')
+                        InlineKeyboardButton("④", callback_data=f'plll 3|{query}|{user_id}'),
+                        InlineKeyboardButton("⑤", callback_data=f'plll 4|{query}|{user_id}')
                     ],
                     [InlineKeyboardButton(text="🗑️ close", callback_data="cls")],
                 ]
