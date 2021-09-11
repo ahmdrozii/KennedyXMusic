@@ -29,13 +29,12 @@ async def addchannel(client, message):
         await USER.send_message(message.chat.id, "__**Saya bergabung ke grup untuk memutar musik**__")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>Userbot sudah berada didalam chat</b>",
+            "<b>{user.first_name} sudah ada di obrolan!</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>🛑 Flood Wait Error 🛑 \n User {user.first_name} couldn't join your group due to heavy join requests for userbot! Make sure user is not banned in group."
-            "\n\nOr manually add Asisstant to your Group and try again</b>",
+            f"<b>⚠️ Flood Wait Error! \n{user.first_name} tidak dapat bergabung dengan group anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam group atau tambahkan @{user.username} secara manual ke Group Anda dan coba lagi.</b>",
         )
         return
     await message.reply_text(
