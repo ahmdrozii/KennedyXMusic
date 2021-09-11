@@ -569,7 +569,7 @@ async def play(_, message: Message):
             emojilist = ["·①·","·②·","·③·","·④·","·⑤·"]
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title'][:23]}](https://youtube.com{results[j]['url_suffix']})...\n"
-                toxxt += f" ├ {results[j]['views']} - {results[j]['duration']}\n"
+                toxxt += f" ├ {results[j]['views']}"
                 toxxt += f" └ Duration - {results[j]['duration']}\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
@@ -661,3 +661,104 @@ async def play(_, message: Message):
         return await lel.delete()
 
 
+@Client.on_callback_query(filters.regex(pattern=r"plll"))
+async def lol_cb(b, cb):
+    global que
+
+    cbd = cb.data.strip()
+    chat_id = cb.message.chat.id
+    typed_=cbd.split(None, 1)[1]
+    #useer_id = cb.message.reply_to_message.from_user.id
+    try:
+        x,query,useer_id = typed_.split("|")      
+    except:
+        await cb.message.edit("⚠️ Lagu tidak ditemukan!")
+        return
+    useer_id = int(useer_id)
+    if cb.from_user.id != useer_id:
+        await cb.answer("Anda bukan orang yang meminta untuk memutar lagu!", show_alert=True)
+        return
+    await cb.message.edit("💿 memutar...")
+    x=int(x)
+    try:
+        useer_name = cb.message.reply_to_message.from_user.first_name
+    except:
+        useer_name = cb.message.from_user.first_name
+
+    results = YoutubeSearch(query, max_results=5).to_dict()
+    resultss=results[x]["url_suffix"]
+    title=results[x]["title"]
+    thumbnail=results[x]["thumbnails"][0]
+    duration=results[x]["duration"]
+    views=results[x]["views"]
+    url = f"https://youtube.com{resultss}"
+
+    try:    
+        secmul, dur, dur_arr = 1, 0, duration.split("·")
+        for i in range(len(dur_arr)-1, -1, -1):
+            dur += (int(dur_arr[i]) * secmul)
+            secmul *= 60
+        if (dur / 60) > DURATION_LIMIT:
+             await cb.message.edit(f"⚠️ Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar.")
+             return
+    except:
+        pass
+    try:
+        thumb_name = f"thumb{title}.jpg"
+        thumb = requests.get(thumbnail, allow_redirects=True)
+        open(thumb_name, "wb").write(thumb.content)
+    except Exception as e:
+        print(e)
+        return
+    dlurl=url
+    dlurl=dlurl.replace("youtube","youtubepp")
+    keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                ],
+                [InlineKeyboardButton(text="∅ close", callback_data="cls")],
+            ]
+        )
+    requested_by = useer_name
+    await generate_cover(title, thumbnail)
+    file_path = await converter.convert(youtube.download(url))  
+    if chat_id in callsmusic.pytgcalls.active_calls:
+        position = await queues.put(chat_id, file=file_path)
+        qeue = que.get(chat_id)
+        s_name = title
+        try:
+            r_by = cb.message.reply_to_message.from_user
+        except:
+            r_by = cb.message.from_user
+        loc = file_path
+        appendable = [s_name, r_by, loc]
+        qeue.append(appendable)
+        await cb.message.delete()
+        await b.send_photo(chat_id,
+            photo="final.png",
+            caption = f"[{title[:35]}]({url})...\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\n" \
+                    + f"request by {message.from_user.mention}",
+                   reply_markup=keyboard)
+        os.remove("final.png")
+
+    else:
+        que[chat_id] = []
+        qeue = que.get(chat_id)
+        s_name = title
+        try:
+            r_by = cb.message.reply_to_message.from_user
+        except:
+            r_by = cb.message.from_user
+        loc = file_path
+        appendable = [s_name, r_by, loc]
+        qeue.append(appendable)
+
+        callsmusic.pytgcalls.join_group_call(chat_id, file_path)
+        await cb.message.delete()
+        await b.send_photo(chat_id,
+            photo="final.png",
+            caption = f"[{title[:35]}]({url})...\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\n" \
+                    + f"request by {message.from_user.mention}",
+                   reply_markup=keyboard)
+        os.remove("final.png")
