@@ -823,7 +823,7 @@ async def ytplay(_, message: Message):
             f"<i>Assistant terblokir dari grup, minta admin untuk `/unban @{ASSISTANT_NAME}` atau bisa lakukan /userbotjoin</i>"
         )
         return
-    await lel.edit("🔎 mencari lagu...")
+    await lel.edit("🔎 processing...")
     user_id = message.from_user.id
     user_name = message.from_user.first_name
      
