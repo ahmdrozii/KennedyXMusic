@@ -124,7 +124,7 @@ async def playlist(client, message):
         for song in temp:
             name = song[0]
             usr = song[1].mention(style="md")
-            msg += f"\n♬ {name}..."
+            msg += f"\n♬ {name}"
             msg += f"\nrequest by {usr}\n"
     await message.reply_text(msg)
 
@@ -205,7 +205,7 @@ async def hfmm(_, message):
             return
         DISABLED_GROUPS.remove(message.chat.id)
         await lel.edit(
-            f"Musik berhasil diaktifkan!\n💬 {message.chat.id}"
+            f"Musik berhasil diaktifkan!"
         )
 
     elif status == "OFF" or status == "off" or status == "Off":
@@ -216,7 +216,7 @@ async def hfmm(_, message):
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
-            f"Musik berhasil dinonaktifkan!\n💬 {message.chat.id}"
+            f"Musik berhasil dinonaktifkan!"
         )
     else:
         await message.reply_text(
@@ -251,7 +251,7 @@ async def p_cb(b, cb):
              for song in temp:
                  name = song[0]
                  usr = song[1].mention(style="md")
-                 msg += f"\n♬ {name}..."
+                 msg += f"\n♬ {name}"
                  msg += f"\nrequest by {usr}\n"
         await cb.message.edit(msg)      
 
@@ -319,7 +319,7 @@ async def m_cb(b, cb):
              for song in temp:
                  name = song[0]
                  usr = song[1].mention(style="md")
-                 msg += f"\n♬ {name}..."
+                 msg += f"\n♬ {name}"
                  msg += f"\nrequest by {usr}\n"
         await cb.message.edit(msg)      
                       
@@ -356,9 +356,9 @@ async def m_cb(b, cb):
         marr = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("·pause·", "pause"),
-                    InlineKeyboardButton("·resume·", "resume"),
-                    InlineKeyboardButton("·skip·", "skip")
+                    InlineKeyboardButton("▶️", "pause"),
+                    InlineKeyboardButton("⏸️", "resume"),
+                    InlineKeyboardButton("⏭️", "skip")
                 
                 ],
                 [
@@ -492,7 +492,7 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"⚠️ **lagu dengan durasi lebih dari** `{DURATION_LIMIT}` **menit tidak dapat diputar!**"
+                f"⚠️ **Lagu dengan durasi lebih dari** `{DURATION_LIMIT}` **menit tidak dapat diputar!**"
             )
         keyboard = InlineKeyboardMarkup(
             [
@@ -569,7 +569,7 @@ async def play(_, message: Message):
             emojilist = ["·①·","·②·","·③·","·④·","·⑤·"]
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title'][:23]}](https://youtube.com{results[j]['url_suffix']})...\n"
-                toxxt += f" ├ {results[j]['views']}"
+                toxxt += f" ├ {results[j]['views']}"\n
                 toxxt += f" └ Duration - {results[j]['duration']}\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
@@ -653,7 +653,7 @@ async def play(_, message: Message):
             return
         await message.reply_photo(
             photo="final.png",
-            caption=f"[{title[:35]}]({url})...\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\n" \
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\n" \
                    +f"request by {message.from_user.mention}",
             reply_markup=keyboard
         )
@@ -678,7 +678,7 @@ async def lol_cb(b, cb):
     if cb.from_user.id != useer_id:
         await cb.answer("Anda bukan orang yang meminta untuk memutar lagu!", show_alert=True)
         return
-    await cb.message.edit("💿 memutar...")
+    await cb.message.edit("💿 menambahkan ke playlist...")
     x=int(x)
     try:
         useer_name = cb.message.reply_to_message.from_user.first_name
@@ -694,7 +694,7 @@ async def lol_cb(b, cb):
     url = f"https://youtube.com{resultss}"
 
     try:    
-        secmul, dur, dur_arr = 1, 0, duration.split("·")
+        secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
@@ -737,7 +737,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption = f"[{title[:35]}]({url})...\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\n" \
+            caption = f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\n" \
                     + f"request by {message.from_user.mention}",
                    reply_markup=keyboard)
         os.remove("final.png")
@@ -758,7 +758,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption = f"[{title[:35]}]({url})...\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\n" \
+            caption = f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\n" \
                     + f"request by {message.from_user.mention}",
                    reply_markup=keyboard)
         os.remove("final.png")
