@@ -492,14 +492,14 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"⚠️ Lagu dengan durasi lebih dari `{DURATION_LIMIT}` **menit tidak dapat diputar!**"
+                f"Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!"
             )
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
         file_name = get_file_name(audio)
@@ -533,7 +533,7 @@ async def play(_, message: Message):
             views = results[0]["views"]
         except Exception as e:
             await lel.edit(
-                "**⚠️ Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
+                "**Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
             )
             print(str(e))
             return
@@ -542,9 +542,9 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
         requested_by = message.from_user.first_name
@@ -569,7 +569,7 @@ async def play(_, message: Message):
             emojilist = ["·①·","·②·","·③·","·④·","·⑤·"]
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title'][:30]}](https://youtube.com{results[j]['url_suffix']})...\n"
-                toxxt += f" ├ **Duration** - {results[j]['duration']}\n"
+                toxxt += f" ├ Duration - {results[j]['duration']}\n"
                 toxxt += f" └ __Powered by ZMSC A.I__\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
@@ -583,7 +583,7 @@ async def play(_, message: Message):
                         InlineKeyboardButton("④", callback_data=f'plll 3|{query}|{user_id}'),
                         InlineKeyboardButton("⑤", callback_data=f'plll 4|{query}|{user_id}')
                     ],
-                    [InlineKeyboardButton(text="🗑️ close", callback_data="cls")],
+                    [InlineKeyboardButton(text="🗑️ Batal", callback_data="cls")],
                 ]
             )
             await lel.edit(toxxt,reply_markup=keyboard,disable_web_page_preview=True)
@@ -605,7 +605,7 @@ async def play(_, message: Message):
                 views = results[0]["views"]
             except Exception as e:
                 await lel.edit(
-                    "**⚠️ Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
+                    "**Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
             )
                 print(str(e))
                 return
@@ -614,9 +614,9 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
             requested_by = message.from_user.first_name
@@ -633,7 +633,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`",
             reply_markup=keyboard
         )
     else:
@@ -652,7 +652,7 @@ async def play(_, message: Message):
             return
         await message.reply_photo(
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`",
             reply_markup=keyboard
         )
         os.remove("final.png")
@@ -670,11 +670,11 @@ async def lol_cb(b, cb):
     try:
         x,query,useer_id = typed_.split("|")      
     except:
-        await cb.message.edit("⚠️ Lagu tidak ditemukan")
+        await cb.message.edit("Lagu tidak ditemukan!")
         return
     useer_id = int(useer_id)
     if cb.from_user.id != useer_id:
-        await cb.answer("Anda bukan orang yang meminta untuk memutar lagu!", show_alert=True)
+        await cb.answer("Anda bukan orang yang meminta!", show_alert=True)
         return
     await cb.message.edit("💿 menambahkan ke playlist...")
     x=int(x)
@@ -697,7 +697,7 @@ async def lol_cb(b, cb):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
         if (dur / 60) > DURATION_LIMIT:
-             await cb.message.edit(f"⚠️ Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar.")
+             await cb.message.edit(f"Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar.")
              return
     except:
         pass
@@ -713,9 +713,9 @@ async def lol_cb(b, cb):
     keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
     requested_by = useer_name
@@ -845,7 +845,7 @@ async def ytplay(_, message: Message):
 
     except Exception as e:
         await lel.edit(
-            "**⚠️ Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
+            "**Lagu tidak ditemukan**, masukkan judul dengan lebih jelas\n\n» **Contoh :** `/play melukis senja - budi doremi`"
         )
         print(str(e))
         return
@@ -854,9 +854,9 @@ async def ytplay(_, message: Message):
     keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🖱️ Menu", callback_data="menu"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
     requested_by = message.from_user.first_name
