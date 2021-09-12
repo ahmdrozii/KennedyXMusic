@@ -570,7 +570,7 @@ async def play(_, message: Message):
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title'][:30]}](https://youtube.com{results[j]['url_suffix']})...\n"
                 toxxt += f" ├ **Duration** - {results[j]['duration']}\n"
-                toxxt += f" └ __Powered by ZMSC A.I__\n\n
+                toxxt += f" └ __Powered by ZMSC A.I__\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
                 [
