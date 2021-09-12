@@ -735,7 +735,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`",
             reply_markup=keyboard
         )
         os.remove("final.png")
@@ -756,7 +756,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`",
             reply_markup=keyboard
         )
         os.remove("final.png")
@@ -873,7 +873,7 @@ async def ytplay(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Antrian ke {position}`",
             reply_markup=keyboard
         )
         os.remove("final.png")
@@ -894,7 +894,7 @@ async def ytplay(_, message: Message):
             return
         await message.reply_photo(
             photo="final.png",
-            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`\nrequest by {message.from_user.mention}",
+            caption=f"[{title[:35]}]({url})\n• Durasi: `{duration}`\n• Status: `Sedang memutar`",
                    reply_markup=keyboard)
         os.remove("final.png")
         return await lel.delete()
