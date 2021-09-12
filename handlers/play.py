@@ -362,7 +362,7 @@ async def m_cb(b, cb):
                 
                 ],
                 [
-                    InlineKeyboardButton("📖 Playlist", "playlist"),
+                    InlineKeyboardButton("📖 Playlist", "playlist")
                 
                 ],
                 [       
@@ -497,9 +497,9 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist")
                 ],
-                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")]
             ]
         )
         file_name = get_file_name(audio)
@@ -542,9 +542,9 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist")
                 ],
-                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")]
             ]
         )
         requested_by = message.from_user.first_name
@@ -614,9 +614,9 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist")
                 ],
-                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")]
             ]
         )
             requested_by = message.from_user.first_name
@@ -713,9 +713,9 @@ async def lol_cb(b, cb):
     keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist")
                 ],
-                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")]
             ]
         )
     requested_by = useer_name
@@ -854,9 +854,9 @@ async def ytplay(_, message: Message):
     keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist"),,
+                    InlineKeyboardButton("📖 Daftar Putar", callback_data="playlist")
                 ],
-                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")]
             ]
         )
     requested_by = message.from_user.first_name
