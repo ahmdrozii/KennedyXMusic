@@ -15,7 +15,7 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>**Jadikan saya admin terlebih dahulu !**</b>",
+            "<b>Jadikan saya admin terlebih dahulu!</b>",
         )
         return
 
@@ -26,15 +26,15 @@ async def addchannel(client, message):
 
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id, "__**Saya bergabung ke grup untuk memutar musik**__")
+        await USER.send_message(message.chat.id, "🕊️ __Saya bergabung ke grup untuk memutar musik__")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>{user.first_name} sudah ada di obrolan!</b>",
+            "🕊️ Assistant sudah ada di obrolan!",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>⚠️ Flood Wait Error! \n{user.first_name} tidak dapat bergabung dengan group anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam group atau tambahkan @{user.username} secara manual ke Group Anda dan coba lagi.</b>",
+            f"**⚠️ Flood Wait Error!**\nAssistant tidak dapat bergabung dengan group anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam group atau tambahkan @zmsc_assistant secara manual ke Group Anda dan coba lagi.</b>",
         )
         return
     await message.reply_text(
