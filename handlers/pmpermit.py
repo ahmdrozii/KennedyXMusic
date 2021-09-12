@@ -17,7 +17,7 @@ async def pmPermit(client: USER, message: Message):
                 return
             await USER.send_message(
                 message.chat.id,
-            f"∅ Pesan otomatis dari [{BOT_NAME}](https://t me/{BOT_USERNAME}).**\n\n⚠️ **Catatan:**\n» Jangan spam agar bot tidak lag.\n» Jangan kirimkan sesuatu yang bersifat pribadi.\n» Jangan memasukkan antrean lagu terlalu banyak.\n\nJoin ke @{GROUP_SUPPORT} untuk keluhan mengenai bot.\n Owner bot: @{OWNER_NAME}\n",
+            f"⚠️ Pesan otomatis dari **[{BOT_NAME}](https://t me/{BOT_USERNAME}).\n\n∅ Catatan:**\n» Jangan spam agar bot tidak lag.\n» Jangan memasukkan antrian lagu terlalu banyak.\n\nJoin ke @{GROUP_SUPPORT} untuk keluhan mengenai bot atau hubungi @{OWNER_NAME}\n",
             )
             return
 
@@ -47,21 +47,21 @@ async def autopmPermiat(client: USER, message: Message):
         return
     message.continue_propagation()    
     
-@USER.on_message(filters.command("yes", [".", ""]) & filters.me & filters.private)
+@USER.on_message(filters.command("y", [".", ""]) & filters.me & filters.private)
 async def pmPermiat(client: USER, message: Message):
     chat_id = message.chat.id
     if not chat_id in pchats:
         pchats.append(chat_id)
-        await message.reply_text("✅ approved to pm.")
+        await message.reply_text("approved to pm.")
         return
     message.continue_propagation()    
     
 
-@USER.on_message(filters.command("no", [".", ""]) & filters.me & filters.private)
+@USER.on_message(filters.command("n", [".", ""]) & filters.me & filters.private)
 async def rmpmPermiat(client: USER, message: Message):
     chat_id = message.chat.id
     if chat_id in pchats:
         pchats.remove(chat_id)
-        await message.reply_text("❌ disapproved to pm.")
+        await message.reply_text("disapproved to pm.")
         return
     message.continue_propagation()
