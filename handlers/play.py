@@ -453,14 +453,14 @@ async def play(_, message: Message):
                 except Exception:
                     # print(e)
                     await lel.edit(
-                        f"⚠️ <b>Error\nAssistant tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup atau tambahkan @{ASSISTANT_NAME} secara manual ke Grup Anda dan coba lagi</b>",
+                        f"⚠️ <b>Error, silahkan lakukan :\n1. `/unban @{ASSISTANT_NAME}` \n2. /userbotjoin</b>",
                     )
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i>Assistant terblokir dari grup, minta admin untuk `/unban @{ASSISTANT_NAME}` atau bisa lakukan /userbotjoin</i>"
+            f"⚠️ <b>Error, silahkan lakukan :\n1. `/unban @{ASSISTANT_NAME}` \n2. /userbotjoin</b>"
         )
         return
     text_links=None
@@ -676,7 +676,7 @@ async def lol_cb(b, cb):
     if cb.from_user.id != useer_id:
         await cb.answer("Anda bukan orang yang meminta!", show_alert=True)
         return
-    await cb.message.edit("💿 menambahkan ke playlist...")
+    await cb.message.edit("💿 loading...")
     x=int(x)
     try:
         useer_name = cb.message.reply_to_message.from_user.first_name
@@ -809,14 +809,14 @@ async def ytplay(_, message: Message):
                 except Exception:
                     # print(e)
                     await lel.edit(
-                        f"⚠️ <b>Error\nAssistant tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup atau tambahkan @{ASSISTANT_NAME} secara manual ke Grup Anda dan coba lagi</b>",
+                        f"⚠️ <b>Error, silahkan lakukan :\n1. `/unban @{ASSISTANT_NAME}` \n2. /userbotjoin</b>",
                     )
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i>Assistant terblokir dari grup, minta admin untuk `/unban @{ASSISTANT_NAME}` atau bisa lakukan /userbotjoin</i>"
+            f"⚠️ <b>Error, silahkan lakukan :\n1. `/unban @{ASSISTANT_NAME}` \n2. /userbotjoin</b>"
         )
         return
     await lel.edit("🔎 processing...")
@@ -828,7 +828,7 @@ async def ytplay(_, message: Message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    await lel.edit("💿 menambahkan ke playlist...")
+    await lel.edit("💿 loading...")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
