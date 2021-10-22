@@ -23,7 +23,7 @@ async def update_admin(client, message):
     for u in new_ads:
         new_admins.append(u.user.id)
     admins[message.chat.id] = new_admins
-    await client.send_message(message.chat.id, "💠 `LAYANAN MUSIK TELAH DIPERBARUI!`")
+    await client.send_message(message.chat.id, "💠 `BOT TELAH DIPERBARUI!`")
 
 
 @Client.on_message(command(["pause", f"pause@{BOT_USERNAME}"]) & other_filters)
@@ -94,4 +94,4 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"Pindah ke antrian berikutnya...")
+    await message.reply_text(f"Lagu berikutnya...")
